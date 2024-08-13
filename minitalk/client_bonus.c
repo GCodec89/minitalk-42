@@ -6,18 +6,16 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:35:16 by gonolive          #+#    #+#             */
-/*   Updated: 2024/08/13 14:56:48 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:12:21 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
 
-static void	sig_confirm(int sig)
+static void	final_msg(int signum)
 {
-	if (sig == SIGUSR2)
-	{
-		ft_printf("Tchanam\n");
-	}
+	if (signum == SIGUSR2)
+		ft_printf("Message received by the server succesfully!\n");
 }
 
 void	send_bits(pid_t pid, char c)
@@ -35,34 +33,33 @@ void	send_bits(pid_t pid, char c)
 		{
 			kill(pid, SIGUSR2);
 		}
-		usleep(100);
+		usleep(500);
 		bit++;
 	}
 }
 
 int	main(int argc, char *argv[])
 {
-	pid_t	pid;
-	char	*msg;
-	char	asp;
+	pid_t				pid;
+	char				*msg;
+	char				asp;
 
 	asp = 34;
 	if (argc == 3)
 	{
 		pid = ft_atoi(argv[1]);
 		msg = argv[2];
-		signal(SIGUSR2, sig_confirm);
+		signal(SIGUSR2, final_msg);
 		while (*msg != '\0')
 		{
 			send_bits(pid, *msg);
 			msg++;
 		}
-		send_bits(pid, *msg);
 		send_bits(pid, '\n');
 	}
 	else
 	{
-		ft_printf("Error: wrong format\n");
-		ft_printf("Try: ./client %cPID%c %cMESSAGE%c\n", asp, asp, asp, asp);
+		ft_printf("Error: wrong format, try:\n");
+		ft_printf("./client_bonus %cPID%c %cMESSAGE%c\n", asp, asp, asp, asp);
 	}
 }

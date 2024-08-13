@@ -6,7 +6,7 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:29:32 by gonolive          #+#    #+#             */
-/*   Updated: 2024/08/13 17:41:58 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/08/13 21:12:10 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	send_bits(pid_t pid, char c)
 
 int	main(int argc, char *argv[])
 {
-	pid_t	pid;
-	char	*msg;
-	char	asp;
+	pid_t				pid;
+	char				*msg;
+	char				asp;
 
 	asp = 34;
 	if (argc == 3)
