@@ -6,7 +6,7 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:58:50 by gonolive          #+#    #+#             */
-/*   Updated: 2024/08/13 15:25:30 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/08/13 17:29:36 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdarg.h>
 # include "printf/ft_printf.h"
 
-int	ft_atoi(char *str);
+int		ft_atoi(char *str);
 char	*ft_strjoin_mod(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
 
