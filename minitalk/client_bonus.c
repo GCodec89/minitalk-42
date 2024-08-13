@@ -1,16 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/09 21:29:32 by gonolive          #+#    #+#             */
-/*   Updated: 2024/08/13 15:01:50 by gonolive         ###   ########.fr       */
+/*   Created: 2024/08/12 15:35:16 by gonolive          #+#    #+#             */
+/*   Updated: 2024/08/13 14:56:48 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
+
+static void	sig_confirm(int sig)
+{
+	if (sig == SIGUSR2)
+	{
+		ft_printf("Tchanam\n");
+	}
+}
 
 void	send_bits(pid_t pid, char c)
 {
@@ -43,6 +51,7 @@ int	main(int argc, char *argv[])
 	{
 		pid = ft_atoi(argv[1]);
 		msg = argv[2];
+		signal(SIGUSR2, sig_confirm);
 		while (*msg != '\0')
 		{
 			send_bits(pid, *msg);
