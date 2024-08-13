@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/29 11:58:50 by gonolive          #+#    #+#             */
-/*   Updated: 2024/08/13 15:25:30 by gonolive         ###   ########.fr       */
+/*   Created: 2024/08/13 15:20:46 by gonolive          #+#    #+#             */
+/*   Updated: 2024/08/13 15:21:54 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
-# include "printf/ft_printf.h"
+size_t	ft_strlen(const char *s)
+{
+	int	i;
 
-int	ft_atoi(char *str);
-char	*ft_strjoin_mod(char *s1, char *s2);
-size_t	ft_strlen(const char *s);
-
-#endif
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
