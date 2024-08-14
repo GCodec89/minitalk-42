@@ -6,40 +6,64 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:29:39 by gonolive          #+#    #+#             */
-/*   Updated: 2024/08/13 20:55:55 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:51:47 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-char	*g_global;
+char	*ft_joinchar(char *str, char c)
+{
+	char	*newstr;
+	int		i;
+	int		len;
+
+	if (!str)
+	{
+		str = malloc(sizeof(char));
+		if (!str)
+			return (NULL);
+		str[0] = '\0';
+	}
+	len = ft_strlen(str);
+    newstr = (char *)malloc(sizeof(char) * (len + 2));
+    if (!newstr)
+        return (NULL);
+    i = 0;
+    while (str[i])
+    {
+        newstr[i] = str[i];
+        i++;
+    }
+    newstr[i++] = c;
+    newstr[i] = '\0';
+    free(str);
+    return (newstr);
+}
 
 void	ft_bit_to_char(int sig)
 {
 	static int	bit;
-	static int	i;
-	char		*c1;
+	static int	cchar;
+	static char	*str;
 
 	if (sig == SIGUSR1)
-		i |= (0x01 << bit);
+		cchar |= (0x01 << bit);
 	bit++;
 	if (bit == 8)
 	{
-		c1 = (char *)malloc(sizeof(char) * 2);
-		if (!c1)
-			return ;
-		c1[0] = (char)i;
-		c1[1] = '\0';
-		g_global = ft_strjoin_mod(g_global, c1);
-		if (c1[0] == '\n')
+		if (cchar == '\0')
 		{
-			ft_printf("%s", g_global);
-			free(g_global);
-			g_global = NULL;
+			ft_printf("%s", str);
+			free(str);
+			str = NULL;
+		}
+		else
+		{
+			str = ft_joinchar(str, cchar);
 		}
 		bit = 0;
-		i = 0;
-		free(c1);
+		cchar = 0;
 	}
 }
 

@@ -6,53 +6,67 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:35:28 by gonolive          #+#    #+#             */
-/*   Updated: 2024/08/14 09:08:11 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/08/14 14:42:52 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
 
-char	*g_global;
-
-void	ft_byte_to_str(int byte, siginfo_t *info)
+char	*ft_joinchar(char *str, char c)
 {
-	char	*c1;
+	char	*newstr;
+	int		i;
+	int		len;
 
-	if (g_global == (void *)0)
+	if (!str)
 	{
-		kill(info->si_pid, SIGUSR2);
+		str = malloc(sizeof(char));
+		if (!str)
+			return (NULL);
+		str[0] = '\0';
 	}
-	c1 = (char *)malloc(sizeof(char) * 2);
-	if (!c1)
-		return ;
-	c1[0] = (char)byte;
-	c1[1] = '\0';
-	g_global = ft_strjoin_mod(g_global, c1);
-	if (c1[0] == '\n')
-	{
-		ft_printf("%s", g_global);
-		free(g_global);
-		g_global = NULL;
-	}
-	free(c1);
+	len = ft_strlen(str);
+    newstr = (char *)malloc(sizeof(char) * (len + 2));
+    if (!newstr)
+        return (NULL);
+    i = 0;
+    while (str[i])
+    {
+        newstr[i] = str[i];
+        i++;
+    }
+    newstr[i++] = c;
+    newstr[i] = '\0';
+    free(str);
+    return (newstr);
 }
 
-void	ft_bit_to_byte(int sig, siginfo_t *info, void *context)
+void	ft_bit_to_char(int sig, siginfo_t *info, void *context)
 {
 	static int	bit;
-	static int	i;
+	static int	cchar;
+	static char	*str;
 
 	(void)context;
 	if (sig == SIGUSR1)
-	{
-		i |= (0x01 << bit);
-	}
+		cchar |= (0x01 << bit);
 	bit++;
 	if (bit == 8)
 	{
-		ft_byte_to_str(i, info);
+		if (cchar == '\0')
+		{
+			ft_printf("%s", str);
+			ft_printf("\n");
+			free(str);
+			str = NULL;
+			kill(info->si_pid, SIGUSR2);
+		}
+		else
+		{
+			str = ft_joinchar(str, cchar);
+		}
 		bit = 0;
-		i = 0;
+		cchar = 0;
 	}
 }
 
@@ -64,7 +78,7 @@ int	main(int argc, char *argv[])
 	(void)argv;
 	pid = getpid();
 	ft_printf("Server PID: %d\n", pid);
-	sig.sa_sigaction = ft_bit_to_byte;
+	sig.sa_sigaction = ft_bit_to_char;
 	sigemptyset(&sig.sa_mask);
 	sig.sa_flags = SA_SIGINFO;
 	while (argc == 1)

@@ -6,29 +6,35 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:29:32 by gonolive          #+#    #+#             */
-/*   Updated: 2024/08/14 08:22:51 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:58:39 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	send_bits(pid_t pid, char c)
+void	send_bits(pid_t pid, char *str)
 {
-	int	bit;
+	int		bit;
+	size_t	i;
 
-	bit = 0;
-	while (bit < 8)
+	i = 0;
+	while (i <= ft_strlen(str))
 	{
-		if ((c & (0x01 << bit)) != 0)
+		bit = 0;
+		while (bit < 8)
 		{
-			kill(pid, SIGUSR1);
+			if ((str[i] & (0x01 << bit)) != 0)
+			{
+				kill(pid, SIGUSR1);
+			}
+			else
+			{
+				kill(pid, SIGUSR2);
+			}
+			usleep(200);
+			bit++;
 		}
-		else
-		{
-			kill(pid, SIGUSR2);
-		}
-		usleep(100);
-		bit++;
+		i++;
 	}
 }
 
@@ -43,12 +49,7 @@ int	main(int argc, char *argv[])
 	{
 		pid = ft_atoi(argv[1]);
 		msg = argv[2];
-		while (*msg != '\0')
-		{
-			send_bits(pid, *msg);
-			msg++;
-		}
-		send_bits(pid, '\n');
+		send_bits(pid, msg);
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:11:06 by gonolive          #+#    #+#             */
-/*   Updated: 2024/08/13 21:22:37 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/08/14 14:33:42 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <aio.h>
 # include "libft/libft.h"
 
-void	send_bits(pid_t pid, char c);
-void	ft_bit_to_byte(int sig, siginfo_t *info, void *context);
-void	ft_byte_to_str(int byte, siginfo_t *info);
+void	send_bits(pid_t pid, char *str);
+void	ft_bit_to_char(int sig, siginfo_t *info, void *context);
+char	*ft_joinchar(char *str, char c);
 
 #endif

@@ -6,11 +6,11 @@
 #    By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/29 11:59:42 by gonolive          #+#    #+#              #
-#    Updated: 2024/08/13 15:25:38 by gonolive         ###   ########.fr        #
+#    Updated: 2024/08/14 14:44:16 by gonolive         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-LIB_SRCS		= ft_atoi.c ft_strlen.c ft_strjoin_mod.c\
+LIB_SRCS		= ft_atoi.c ft_strlen.c \
 					printf/ft_printf.c printf/ft_printnbr.c printf/ft_printptr.c \
 					printf/ft_printstr.c printf/ft_putchar.c printf/ft_putptrhex.c \
 					printf/ft_utoa.c \
