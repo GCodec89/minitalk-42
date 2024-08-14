@@ -6,7 +6,7 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:35:16 by gonolive          #+#    #+#             */
-/*   Updated: 2024/08/14 14:41:59 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/08/14 14:50:08 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,3 @@ int	main(int argc, char *argv[])
 		ft_printf("Try: ./client %cPID%c %cMESSAGE%c\n", asp, asp, asp, asp);
 	}
 }
-

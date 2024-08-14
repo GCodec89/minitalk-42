@@ -6,13 +6,13 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:35:28 by gonolive          #+#    #+#             */
-/*   Updated: 2024/08/14 14:42:52 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/08/14 15:51:00 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
 
-char	*ft_joinchar(char *str, char c)
+char	*ft_joinchar(char *str, char c, siginfo_t *info)
 {
 	char	*newstr;
 	int		i;
@@ -20,25 +20,26 @@ char	*ft_joinchar(char *str, char c)
 
 	if (!str)
 	{
+		kill(info->si_pid, SIGUSR2);
 		str = malloc(sizeof(char));
 		if (!str)
 			return (NULL);
 		str[0] = '\0';
 	}
 	len = ft_strlen(str);
-    newstr = (char *)malloc(sizeof(char) * (len + 2));
-    if (!newstr)
-        return (NULL);
-    i = 0;
-    while (str[i])
-    {
-        newstr[i] = str[i];
-        i++;
-    }
-    newstr[i++] = c;
-    newstr[i] = '\0';
-    free(str);
-    return (newstr);
+	newstr = (char *)malloc(sizeof(char) * (len + 2));
+	if (!newstr)
+		return (NULL);
+	i = 0;
+	while (str[i])
+	{
+		newstr[i] = str[i];
+		i++;
+	}
+	newstr[i++] = c;
+	newstr[i] = '\0';
+	free(str);
+	return (newstr);
 }
 
 void	ft_bit_to_char(int sig, siginfo_t *info, void *context)
@@ -59,11 +60,10 @@ void	ft_bit_to_char(int sig, siginfo_t *info, void *context)
 			ft_printf("\n");
 			free(str);
 			str = NULL;
-			kill(info->si_pid, SIGUSR2);
 		}
 		else
 		{
-			str = ft_joinchar(str, cchar);
+			str = ft_joinchar(str, cchar, info);
 		}
 		bit = 0;
 		cchar = 0;

@@ -6,7 +6,7 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:11:06 by gonolive          #+#    #+#             */
-/*   Updated: 2024/08/14 14:33:42 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/08/14 15:50:44 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 
 void	send_bits(pid_t pid, char *str);
 void	ft_bit_to_char(int sig, siginfo_t *info, void *context);
-char	*ft_joinchar(char *str, char c);
+char	*ft_joinchar(char *str, char c, siginfo_t *info);
 
 #endif

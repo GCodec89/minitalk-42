@@ -6,7 +6,7 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:29:39 by gonolive          #+#    #+#             */
-/*   Updated: 2024/08/14 13:51:47 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/08/14 14:53:17 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@ char	*ft_joinchar(char *str, char c)
 		str[0] = '\0';
 	}
 	len = ft_strlen(str);
-    newstr = (char *)malloc(sizeof(char) * (len + 2));
-    if (!newstr)
-        return (NULL);
-    i = 0;
-    while (str[i])
-    {
-        newstr[i] = str[i];
-        i++;
-    }
-    newstr[i++] = c;
-    newstr[i] = '\0';
-    free(str);
-    return (newstr);
+	newstr = (char *)malloc(sizeof(char) * (len + 2));
+	if (!newstr)
+		return (NULL);
+	i = 0;
+	while (str[i])
+	{
+		newstr[i] = str[i];
+		i++;
+	}
+	newstr[i++] = c;
+	newstr[i] = '\0';
+	free(str);
+	return (newstr);
 }
 
 void	ft_bit_to_char(int sig)
