@@ -6,7 +6,7 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:35:28 by gonolive          #+#    #+#             */
-/*   Updated: 2024/08/13 22:13:43 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/08/14 09:08:11 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ void	ft_byte_to_str(int byte, siginfo_t *info)
 {
 	char	*c1;
 
+	if (g_global == (void *)0)
+	{
+		kill(info->si_pid, SIGUSR2);
+	}
 	c1 = (char *)malloc(sizeof(char) * 2);
 	if (!c1)
 		return ;
@@ -29,7 +33,6 @@ void	ft_byte_to_str(int byte, siginfo_t *info)
 		ft_printf("%s", g_global);
 		free(g_global);
 		g_global = NULL;
-		kill(info->si_pid, SIGUSR2);
 	}
 	free(c1);
 }
