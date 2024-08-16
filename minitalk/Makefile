@@ -6,7 +6,7 @@
 #    By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/09 21:47:35 by gonolive          #+#    #+#              #
-#    Updated: 2024/08/12 16:20:56 by gonolive         ###   ########.fr        #
+#    Updated: 2024/08/16 15:13:17 by gonolive         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,12 +28,12 @@ SERVER_BONUS		= server_bonus
 OBJ_CLIENT_BNS		= client_bonus.o
 OBJ_SERVER_BNS		= server_bonus.o
 
+all:				$(CLIENT) $(SERVER)
+
 LIBFT	 			= libft/libft.a
 
 $(LIBFT):
 					$(MAKE) -C ./libft
-
-all:				$(CLIENT) $(SERVER)
 
 $(CLIENT):			$(OBJ_CLIENT) $(LIBFT)
 					$(CC) $(CFLAGS) $(OBJ_CLIENT) $(LIBFT) -o $(CLIENT)
@@ -59,4 +59,4 @@ $(SERVER_BONUS):	$(OBJ_SERVER_BNS) $(LIBFT)
 
 re:             	fclean all
 
-.PHONY:         	all clean fclean re
+.PHONY:         	all clean fclean bonus re

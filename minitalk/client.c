@@ -6,7 +6,7 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:29:32 by gonolive          #+#    #+#             */
-/*   Updated: 2024/08/14 13:58:39 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/08/16 11:13:00 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	send_bits(pid_t pid, char *str)
 			{
 				kill(pid, SIGUSR2);
 			}
-			usleep(200);
+			usleep(250);
 			bit++;
 		}
 		i++;

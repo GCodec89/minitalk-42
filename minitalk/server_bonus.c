@@ -6,28 +6,25 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:35:28 by gonolive          #+#    #+#             */
-/*   Updated: 2024/08/14 15:51:00 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/08/16 15:17:55 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
 
-char	*ft_joinchar(char *str, char c, siginfo_t *info)
+char	*ft_joinchar(char *str, char c)
 {
 	char	*newstr;
 	int		i;
-	int		len;
 
 	if (!str)
 	{
-		kill(info->si_pid, SIGUSR2);
 		str = malloc(sizeof(char));
 		if (!str)
 			return (NULL);
 		str[0] = '\0';
 	}
-	len = ft_strlen(str);
-	newstr = (char *)malloc(sizeof(char) * (len + 2));
+	newstr = (char *)malloc(sizeof(char) * (ft_strlen(str) + 2));
 	if (!newstr)
 		return (NULL);
 	i = 0;
@@ -56,14 +53,14 @@ void	ft_bit_to_char(int sig, siginfo_t *info, void *context)
 	{
 		if (cchar == '\0')
 		{
-			ft_printf("%s", str);
-			ft_printf("\n");
+			kill(info->si_pid, SIGUSR2);
+			ft_printf("%s\n", str);
 			free(str);
 			str = NULL;
 		}
 		else
 		{
-			str = ft_joinchar(str, cchar, info);
+			str = ft_joinchar(str, cchar);
 		}
 		bit = 0;
 		cchar = 0;
